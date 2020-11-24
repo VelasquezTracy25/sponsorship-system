@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="coords">League's Coordinate's</label>
+                        <label for="coords">League's Coordinates</label>
                         <input type="text" class="form-control" id="coords">
                     </div>
                 </div>
@@ -53,20 +53,22 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="coords">Radius )</label>
-                        <select id="inputRadius" class="form-control" th:field="*{radius}">
+                        <label for="coords">Radius</label>
+                        <select id="inputRadius" class="form-control" >
+<!--                        th:field="*{radius}"-->
+<!--                        >-->
                             <option selected th:value="5" th:text="'5 miles'"></option>
                             <option th:value="10" th:text="'10 miles'"></option>
-                            <option th:value="25" th:text="'15 miles'"></option>
-                            <option th:value="50" th:text="'20 miles'"></option>
-                            <option th:value="100" th:text="'25 miles'"></option>
+                            <option th:value="25" th:text="'25 miles'"></option>
+                            <option th:value="50" th:text="'50 miles'"></option>
+                            <option th:value="100" th:text="'100 miles'"></option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="price">Sponsorship Need</label>
-                        <input type="number" class="form-control" id="price">
+                        <label for="price">Sponsorship Budget</label>
+                        <input type="number" class="form-control" id="budget">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
