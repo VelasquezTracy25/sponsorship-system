@@ -5,10 +5,7 @@ import com.madeline.sponsorshipsystem.repositories.LeagueRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +34,19 @@ public class FormController {
     @PostMapping("/find-leagues")
     public String showLeagues( @RequestParam(name = "coords") String coords,
                                @RequestParam(name = "radius") int radius,
-                               @RequestParam(name = "budget") int budget){
+                               @RequestParam(name = "budget") int budget,
+                               Model model){
     List<League> acceptedLeagues = findLeagues(coords, radius, budget);
 
-    for (League league: acceptedLeagues){
-        System.out.println("Name:" + league.getName());
-        System.out.println("Price:" + league.getPrice());
+    int totalSpend = 0;
+
+    for (League acceptedLeague: acceptedLeagues){
+        System.out.println("Name:" + acceptedLeague.getName());
+        System.out.println("Price:" + acceptedLeague.getPrice());
+        totalSpend = totalSpend + acceptedLeague.getPrice();
     }
+        System.out.println("Total Budget Used: " + totalSpend);
+        System.out.println("Total Budget Remaining: " + (budget - totalSpend));
     return "redirect:/";
     }
 
