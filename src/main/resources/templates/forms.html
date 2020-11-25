@@ -21,34 +21,34 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <section class="d-flex">
-            <form th:action="@{'/add-league/'}" method="POST" th:object="${league}">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="name">League Name</label>
-                        <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            <section class="d-flex row mt-2">
+                <form th:action="@{'/add-league/'}" method="POST" th:object="${league}" class="col-md-6">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">League Name</label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="coords">League's Coordinates</label>
-                        <input type="text" class="form-control" id="coords" th:field="*{coords}" required>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="coords">League's Coordinates</label>
+                            <input type="text" class="form-control" id="coords" th:field="*{coords}" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="price">Sponsorship Need</label>
-                        <input type="number" class="form-control" id="price" th:field="*{price}" required>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="price">Sponsorship Need</label>
+                            <input type="number" class="form-control" id="price" th:field="*{price}" required>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <div id="leagues"></div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <div id="leagues" class="col-md-6 row"></div>
             </section>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <section class="d-flex">
-                <form th:action="@{'/find-leagues/'}" method="POST">
+            <section class="d-flex row mt-2">
+                <form th:action="@{'/find-leagues/'}" method="POST" class="col-md-6">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="name">Preferred Location</label>
@@ -75,7 +75,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-<!--                <div id="leagues"></div>-->
+                <div id="leagues-results" class="col-md-6"></div>
             </section>
         </div>
     </div>
@@ -102,7 +102,7 @@
         request.done(function (leagues) {
             let html = '';
             leagues.forEach(function (league) {
-                html += '<div>';
+                html += '<div class="col-md-6">';
                 html += '<p><strong>' + league.name + '</strong></p>';
                 html += '<p>$' + league.price + '</p>';
                 html += '</div>';
