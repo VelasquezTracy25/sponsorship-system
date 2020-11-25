@@ -19,6 +19,11 @@ public class FormController {
         this.leagueRepo = leagueRepo;
     }
 
+    @GetMapping("/leagues.json")
+    public @ResponseBody List<League> viewAllLeaguesInJSONFormat() {
+        return leagueRepo.findAll();
+    }
+
     @GetMapping("/")
     public String viewForms(Model model) {
         model.addAttribute("league", new League());

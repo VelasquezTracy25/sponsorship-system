@@ -21,8 +21,9 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <section class="d-flex">
             <form th:action="@{'/add-league/'}" method="POST" th:object="${league}">
-            <div class="form-row">
+                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name">League Name</label>
                         <input type="text" class="form-control" id="name" th:field="*{name}" required>
@@ -42,35 +43,40 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            <div id="leagues"></div>
+            </section>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <form th:action="@{'/find-leagues/'}" method="POST">
-            <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="name">Preferred Location</label>
-                        <input type="text" class="form-control" id="coords2" name="coords" required>
+            <section class="d-flex">
+                <form th:action="@{'/find-leagues/'}" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Preferred Location</label>
+                            <input type="text" class="form-control" id="coords2" name="coords" required>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="coords">Radius</label>
-                        <select id="inputRadius" class="form-control" name="radius" required>
-                            <option selected th:value="5" th:text="'5 miles'"></option>
-                            <option th:value="10" th:text="'10 miles'"></option>
-                            <option th:value="25" th:text="'25 miles'"></option>
-                            <option th:value="50" th:text="'50 miles'"></option>
-                            <option th:value="100" th:text="'100 miles'"></option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="coords">Radius</label>
+                            <select id="inputRadius" class="form-control" name="radius" required>
+                                <option selected th:value="5" th:text="'5 miles'"></option>
+                                <option th:value="10" th:text="'10 miles'"></option>
+                                <option th:value="25" th:text="'25 miles'"></option>
+                                <option th:value="50" th:text="'50 miles'"></option>
+                                <option th:value="100" th:text="'100 miles'"></option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="budget">Sponsorship Budget</label>
-                        <input type="number" class="form-control" id="budget" name="budget" required>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="budget">Sponsorship Budget</label>
+                            <input type="number" class="form-control" id="budget" name="budget" required>
+                        </div>
                     </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+<!--                <div id="leagues"></div>-->
+            </section>
         </div>
     </div>
 </div>
@@ -84,4 +90,25 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"
+>
+</script>
+<script>
+    (function ($) {
+        let request = $.ajax({'url': '/leagues.json'});
+        request.done(function (leagues) {
+            let html = '';
+            leagues.forEach(function (league) {
+                html += '<div>';
+                html += '<p><strong>' + league.name + '</strong></p>';
+                html += '<p>$' + league.price + '</p>';
+                html += '</div>';
+            });
+            $('#leagues').html(html);
+        });
+    })(jQuery);
+</script>
 </body>
